@@ -1,4 +1,4 @@
-package writer
+package lmsg
 
 type PerfData struct{}
 type PerfMessage struct {
@@ -6,7 +6,7 @@ type PerfMessage struct {
 	data *AsyncRequestData
 }
 
-func (*PerfMessage) LogLevel() LogLevel {
+func (*PerfMessage) LogType() LogType {
 	return PERF
 }
 func (msg *PerfMessage) JSON() string {

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net"
 	"net/http"
 
 	"github.com/egoholic/juggler/kvs/config"
@@ -9,7 +10,12 @@ import (
 
 func main() {
 	app := newApp()
-	http.ListenAndServe(config.ListenTo(), app)
+	c, err := net.Dial("unix", config.UnixSocketPath())
+	if err != nil {
+		panic(err)
+	}
+	defer c.Close()
+
 }
 
 func newApp() http.Handler {
@@ -18,8 +24,4 @@ func newApp() http.Handler {
 
 type App struct {
 	node *node.Node
-}
-
-func (*App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-
 }

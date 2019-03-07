@@ -1,11 +1,11 @@
-package writer
+package lmsg
 
 type ErrorMessage struct {
 	msgBase
 	err error
 }
 
-func (*ErrorMessage) LogLevel() LogLevel {
+func (*ErrorMessage) LogType() LogType {
 	return ERROR
 }
 func (msg *ErrorMessage) JSON() string {

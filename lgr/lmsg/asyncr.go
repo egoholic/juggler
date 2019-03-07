@@ -1,4 +1,4 @@
-package writer
+package lmsg
 
 type AsyncRequestData struct{}
 type AsyncRequestMessage struct {
@@ -6,12 +6,14 @@ type AsyncRequestMessage struct {
 	data *AsyncRequestData
 }
 
-func (*AsyncRequestMessage) LogLevel() LogLevel {
+func (*AsyncRequestMessage) LogType() LogType {
 	return ASYNCR
 }
+
 func (msg *AsyncRequestMessage) JSON() string {
 	return ""
 }
+
 func Asyncr() {
 
 }

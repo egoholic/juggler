@@ -1,4 +1,4 @@
-package writer
+package lmsg
 
 type MemData struct{}
 type MemMessage struct {
@@ -6,7 +6,7 @@ type MemMessage struct {
 	data *MemData
 }
 
-func (*MemMessage) LogLevel() LogLevel {
+func (*MemMessage) LogType() LogType {
 	return MEMUSG
 }
 func (msg *MemMessage) JSON() string {

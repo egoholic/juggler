@@ -1,4 +1,4 @@
-package writer
+package lmsg
 
 type SyncRequestData struct{}
 type SyncRequestMessage struct {
@@ -6,7 +6,7 @@ type SyncRequestMessage struct {
 	data *SyncRequestData
 }
 
-func (*SyncRequestMessage) LogLevel() LogLevel {
+func (*SyncRequestMessage) LogType() LogType {
 	return SYNCR
 }
 func (msg *SyncRequestMessage) JSON() string {

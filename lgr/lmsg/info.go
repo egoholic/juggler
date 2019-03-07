@@ -1,11 +1,11 @@
-package writer
+package lmsg
 
 type InfoMessage struct {
 	msgBase
 	msg string
 }
 
-func (*InfoMessage) LogLevel() LogLevel {
+func (*InfoMessage) LogType() LogType {
 	return INFO
 }
 func (msg *InfoMessage) JSON() string {
