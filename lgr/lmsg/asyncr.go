@@ -1,9 +1,22 @@
 package lmsg
 
-type AsyncRequestData struct{}
+import "github.com/egoholic/juggler/lgr/lmsg/uuid"
+
+type asyncRequestData struct {
+	sender      string
+	receiver    string
+	description string
+}
+
 type AsyncRequestMessage struct {
 	msgBase
-	data *AsyncRequestData
+	asyncRequestData
+}
+
+func Asyncr(place, label, sender, receiver, description string) *AsyncRequestMessage {
+	base := msgBase{typ: ASYNCR, ruid: uuid.New(), place: place, label: label}
+	reqData := asyncRequestData{sender: sender, receiver: receiver, description: description}
+	return &AsyncRequestMessage{base, reqData}
 }
 
 func (*AsyncRequestMessage) LogType() LogType {
@@ -12,8 +25,4 @@ func (*AsyncRequestMessage) LogType() LogType {
 
 func (msg *AsyncRequestMessage) JSON() string {
 	return ""
-}
-
-func Asyncr() {
-
 }
