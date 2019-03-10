@@ -1,15 +1,12 @@
 package lmsg
 
-import "github.com/egoholic/juggler/lgr/lmsg/uuid"
-
 type CPUUsgMessage struct {
-	msgBase
+	meta       *Meta
 	percentage int
 }
 
-func CPUUsg(place, label string, percentage int) *CPUUsgMessage {
-	base := msgBase{typ: CPUUSG, ruid: uuid.New(), place: place, label: label}
-	return &CPUUsgMessage{base, percentage}
+func CPUUsg(meta *Meta, percentage int) *CPUUsgMessage {
+	return &CPUUsgMessage{meta, percentage}
 }
 
 func (*CPUUsgMessage) LogType() LogType {

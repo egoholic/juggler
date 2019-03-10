@@ -2,8 +2,6 @@ package lmsg
 
 import (
 	"time"
-
-	"github.com/egoholic/juggler/lgr/lmsg/uuid"
 )
 
 type syncRequestData struct {
@@ -14,15 +12,13 @@ type syncRequestData struct {
 }
 
 type SyncRequestMessage struct {
-	msgBase
+	meta *Meta
 	syncRequestData
 }
 
-func Syncr(place, label, sender, receiver, description string, latency time.Duration) *SyncRequestMessage {
-	base := msgBase{typ: SYNCR, ruid: uuid.New(), place: place, label: label}
+func Syncr(meta *Meta, sender, receiver, description string, latency time.Duration) *SyncRequestMessage {
 	data := syncRequestData{sender: sender, receiver: receiver, description: description, latency: latency}
-
-	return &SyncRequestMessage{base, data}
+	return &SyncRequestMessage{meta, data}
 }
 
 func (*SyncRequestMessage) LogType() LogType {

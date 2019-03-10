@@ -1,7 +1,5 @@
 package lmsg
 
-import "github.com/egoholic/juggler/lgr/lmsg/uuid"
-
 type asyncRequestData struct {
 	sender      string
 	receiver    string
@@ -9,14 +7,13 @@ type asyncRequestData struct {
 }
 
 type AsyncRequestMessage struct {
-	msgBase
+	meta *Meta
 	asyncRequestData
 }
 
-func Asyncr(place, label, sender, receiver, description string) *AsyncRequestMessage {
-	base := msgBase{typ: ASYNCR, ruid: uuid.New(), place: place, label: label}
+func Asyncr(meta *Meta, sender, receiver, description string) *AsyncRequestMessage {
 	reqData := asyncRequestData{sender: sender, receiver: receiver, description: description}
-	return &AsyncRequestMessage{base, reqData}
+	return &AsyncRequestMessage{meta, reqData}
 }
 
 func (*AsyncRequestMessage) LogType() LogType {

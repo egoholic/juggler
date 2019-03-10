@@ -1,15 +1,12 @@
 package lmsg
 
-import "github.com/egoholic/juggler/lgr/lmsg/uuid"
-
 type ErrorMessage struct {
-	msgBase
-	err error
+	meta *Meta
+	err  error
 }
 
-func Error(place, label string, err error) *ErrorMessage {
-	base := msgBase{typ: ERROR, ruid: uuid.New(), place: place, label: label}
-	return &ErrorMessage{base, err}
+func Error(meta *Meta, err error) *ErrorMessage {
+	return &ErrorMessage{meta, err}
 }
 
 func (*ErrorMessage) LogType() LogType {

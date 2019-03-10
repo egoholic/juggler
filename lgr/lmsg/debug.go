@@ -1,15 +1,12 @@
 package lmsg
 
-import "github.com/egoholic/juggler/lgr/lmsg/uuid"
-
 type DebugMessage struct {
-	msgBase
+	meta *Meta
 	vals *map[string]string
 }
 
-func Debug(place, label string, vals *map[string]string) *DebugMessage {
-	base := msgBase{typ: DEBUG, ruid: uuid.New(), place: place, label: label}
-	return &DebugMessage{base, vals}
+func Debug(meta *Meta, vals *map[string]string) *DebugMessage {
+	return &DebugMessage{meta, vals}
 }
 
 func (*DebugMessage) LogType() LogType {

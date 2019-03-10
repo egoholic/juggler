@@ -1,7 +1,5 @@
 package lmsg
 
-import "github.com/egoholic/juggler/lgr/lmsg/uuid"
-
 type memData struct {
 	objCount  *map[string]int8
 	memBefore int64
@@ -9,14 +7,13 @@ type memData struct {
 }
 
 type MemMessage struct {
-	msgBase
+	meta *Meta
 	memData
 }
 
-func MemUsg(place, label string, objCount *map[string]int8, memBefore, memAfter int64) *MemMessage {
-	base := msgBase{typ: MEMUSG, ruid: uuid.New(), place: place, label: label}
+func MemUsg(meta *Meta, objCount *map[string]int8, memBefore, memAfter int64) *MemMessage {
 	memData := memData{objCount: objCount, memBefore: memBefore, memAfter: memAfter}
-	return &MemMessage{base, memData}
+	return &MemMessage{meta, memData}
 }
 
 func (*MemMessage) LogType() LogType {

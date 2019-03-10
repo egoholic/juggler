@@ -22,9 +22,13 @@ type Message interface {
 	JSON() string
 }
 
-type msgBase struct {
+type Meta struct {
 	typ   LogType
 	ruid  string
 	place string
 	label string
+}
+
+func NewMeta(typ LogType, ruid, place, label string) *Meta {
+	return &Meta{typ: typ, ruid: ruid, place: place, label: label}
 }
