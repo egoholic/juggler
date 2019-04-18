@@ -1,27 +1,26 @@
 package node
 
-type Value struct {
-	val interface{}
-	sig string // helps to understand what is interface{}
-}
-
-func NewValue(v interface{}, sig string) *Value {
-	return &Value{v, sig}
-}
+import "github.com/egoholic/juggler/kvs/value"
 
 type Node struct {
 	id    string
-	store map[string]*Value
+	store map[string]*value.Value
 }
 
 func New(id string) *Node {
-	return &Node{id, make(map[string]*Value, 100)}
+	return &Node{id, make(map[string]*value.Value, 100)}
 }
 
-func (n *Node) Run() chan *Value {
-
+type SetValResult struct {
 }
 
-func (n *Node) run(vch chan *Value) {
-	select {}
+func (n *Node) SetVal(key string, val interface{}, sig string) {
+	prevValue := n.store[key]
+	newValue := value.New(val, sig, prevValue)
+	n.store[key] = newValue
+}
+
+func (n *Node) GetVal(key string) (interface{}, string) {
+	val := n.store[key]
+	return val.Val(), val.Sig()
 }
