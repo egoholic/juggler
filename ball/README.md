@@ -1,2 +1,3 @@
-# Ball is a special kind of (Docker) containers.
-## `ball` package is responsible for building special "ball" part of the juggler balls.
+# Ball is a special kind of (Docker) containers
+## `ball` package is responsible for building "balls" - deliverable endpoints that are main building part of our architecture.
+
